@@ -1,16 +1,6 @@
+/* src/App.css */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -21,18 +11,44 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: red;
 }
 
-.App-link {
-  color: #61dafb;
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  @media screen and (min-width: 564px) and (max-width: 864px) {
+    grid-template-columns: repeat(2, 1fr);
+    /* background-color: pink; */
+  };
+  @media screen and (min-width: 864px) and (max-width: 1064px) {
+    grid-template-columns: repeat(3, 1fr);
+    /* background-color: yellow; */
+  };
+  @media screen and (min-width: 1064px) and (max-width: 1264px) {
+    grid-template-columns: repeat(4, 1fr);
+    /* background-color: aquamarine; */
+  };
+  @media screen and (min-width: 1264px) {
+    grid-template-columns: repeat(5, 1fr);
+    /* background-color: blue; */
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokemon-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-card img {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover; 
+  border-radius: 5px;
 }
