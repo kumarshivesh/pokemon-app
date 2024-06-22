@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import PokemonCard from './components/PokemonCard';
 import SearchBox from './components/SearchBox';
+import Spinner from './components/Spinner';
 
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPokemonData = async () => {
+      setLoading(true);
       const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
       const data = await response.json();
       const pokemonList = await Promise.all(
@@ -18,6 +21,7 @@ function App() {
         })
       );
       setPokemonData(pokemonList);
+      setLoading(false);
     };
 
     fetchPokemonData();
@@ -36,11 +40,15 @@ function App() {
       <header className="App-header">
         <h1>Pokémon List</h1>
         <SearchBox searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
-        <div className="pokemon-grid">
-          {filteredPokemon.map((pokemon) => (
-            <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="pokemon-grid">
+            {filteredPokemon.map((pokemon) => (
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </div>
+        )}
       </header>
     </div>
   );
